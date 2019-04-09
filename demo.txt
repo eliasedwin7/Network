@@ -1,0 +1,89 @@
+System Bootstrap, Version 12.1(3r)T2, RELEASE SOFTWARE (fc1)
+Copyright (c) 2000 by cisco Systems, Inc.
+Cisco 2621 (MPC860) processor (revision 0x200) with 253952K/8192K bytes of memory
+
+Readonly ROMMON initialized
+
+Self decompressing the image :
+########################################################################## [OK]
+
+              Restricted Rights Legend
+
+Use, duplication, or disclosure by the Government is
+subject to restrictions as set forth in subparagraph
+(c) of the Commercial Computer Software - Restricted
+Rights clause at FAR sec. 52.227-19 and subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer
+Software clause at DFARS sec. 252.227-7013.
+
+           cisco Systems, Inc.
+           170 West Tasman Drive
+           San Jose, California 95134-1706
+
+
+
+Cisco Internetwork Operating System Software
+IOS (tm) C2600 Software (C2600-I-M), Version 12.2(28), RELEASE SOFTWARE (fc5)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2005 by cisco Systems, Inc.
+Compiled Wed 27-Apr-04 19:01 by miwang
+
+Cisco 2621 (MPC860) processor (revision 0x200) with 253952K/8192K bytes of memory
+.
+Processor board ID JAD05190MTZ (4292891495)
+M860 processor: part number 0, mask 49
+Bridging software.
+X.25 software, Version 3.0.0.
+2 FastEthernet/IEEE 802.3 interface(s)
+32K bytes of non-volatile configuration memory.
+63488K bytes of ATA CompactFlash (Read/Write)
+
+
+         --- System Configuration Dialog ---
+
+Would you like to enter the initial configuration dialog? [yes/no]: n
+
+
+Press RETURN to get started!
+
+
+
+Router>enable
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#host R1
+R1(config)#fa0/0
+           ^
+% Invalid input detected at '^' marker.
+	
+R1(config)#int fa0/0
+R1(config-if)#ip add 192.168.10.1 255.255.255.0
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+R1(config-if)#exit
+R1(config)#dhcp pool IP10
+            ^
+% Invalid input detected at '^' marker.
+	
+R1(config)#ip dhcp pool IP10
+R1(dhcp-config)#net 192.168.10.0 255.255.255.0
+R1(dhcp-config)#default 192.168.10.1
+R1(dhcp-config)#exi
+R1(config)#%DHCPD-4-PING_CONFLICT: DHCP address conflict:  server pinged 192.168.10.1.
+
+R1(config)#ip dhcp exc 192.168.10.1 192.168.10.10
+R1(config)#exit
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#copy run start
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+R1#sh run 
+R1#
