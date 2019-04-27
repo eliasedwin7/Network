@@ -68,7 +68,7 @@ $ftp set type_ FTP
 set udp [new Agent/UDP]
 $ns attach-agent $n1 $udp
 set null [new Agent/Null]
-$ns attach-agent $n3 $null
+$ns attach-agent $n4 $null
 $ns connect $udp $null
 $udp set fid_ 2
 
